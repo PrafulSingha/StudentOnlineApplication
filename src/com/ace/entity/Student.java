@@ -3,7 +3,6 @@
  */
 package com.ace.entity;
 
-import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -22,7 +21,7 @@ public class Student {
 	public int getStudentId() {
 		return studentId;
 	}
-	@XmlAttribute
+	@XmlElement
 	public void setStudentId(int studentId) {
 		this.studentId = studentId;
 	}
