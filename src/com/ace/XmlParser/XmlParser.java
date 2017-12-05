@@ -22,23 +22,23 @@ public class XmlParser {
 		
 			File newFile =new File("C:\\file.xml");
 			
-			JAXBContext jaxbContext1 = JAXBContext.newInstance(Student.class);
+			/*JAXBContext jaxbContext1 = JAXBContext.newInstance(Student.class);
 			Marshaller jaxbMarshaller = jaxbContext1.createMarshaller();
 
 			// output pretty printed
 			jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
 			jaxbMarshaller.marshal(student1, newFile);
-			jaxbMarshaller.marshal(student1, System.out);
+			jaxbMarshaller.marshal(student1, System.out);*/
 			
 			
 			
-		/*
+		
 			JAXBContext jaxbContext=JAXBContext.newInstance(Student.class);
 			
 			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 			Student student = (Student) jaxbUnmarshaller.unmarshal(newFile);
-			System.out.println(student);*/
+			System.out.println(student);
 			
 		} catch (JAXBException e) {
 			// TODO Auto-generated catch block
