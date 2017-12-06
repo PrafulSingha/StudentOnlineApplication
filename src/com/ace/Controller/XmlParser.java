@@ -1,6 +1,10 @@
 package com.ace.Controller;
 
 import java.io.File;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -9,9 +13,12 @@ import javax.xml.bind.Unmarshaller;
 import com.ace.entity.Student;
 
 public class XmlParser {
+	private static final Logger log = Logger.getLogger(XmlParser.class.getName());
 	
 	public static void main(String[] args) {
-			try {
+		ExecutorService executor = Executors.newFixedThreadPool(5);
+		
+		try {
 		
 			File newFile =new File("C:\\file.xml");
 		
@@ -19,10 +26,10 @@ public class XmlParser {
 			
 			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 			Student student = (Student) jaxbUnmarshaller.unmarshal(newFile);
-			System.out.println(student);
+			log.log(Level.INFO,  "Student Info " +student);
 			
 		} catch (JAXBException e) {
-			System.out.println("Exception Ocuurred ");
+			log.log(Level.SEVERE, "Error Occourred "+e.getMessage());
 		
 		} 
 		

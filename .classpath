@@ -8,6 +8,7 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="lib" path="C:/Users/pku160/Downloads/jaxb-1.8.jar/jaxb-1.8.jar"/>
+	<classpathentry kind="lib" path="C:/Users/pku160/Downloads/jaxb-1.8.jar"/>
+	<classpathentry kind="lib" path="C:/Users/pku160/Downloads/apache-logging-log4j.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
