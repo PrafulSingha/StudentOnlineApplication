@@ -39,6 +39,43 @@ public class Subject {
 	public void setSubjectMarks(int subjectMarks) {
 		this.subjectMarks = subjectMarks;
 	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + subjectId;
+		result = prime * result + subjectMarks;
+		result = prime * result
+				+ ((subjectName == null) ? 0 : subjectName.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Subject other = (Subject) obj;
+		if (subjectId != other.subjectId)
+			return false;
+		if (subjectMarks != other.subjectMarks)
+			return false;
+		if (subjectName == null) {
+			if (other.subjectName != null)
+				return false;
+		} else if (!subjectName.equals(other.subjectName))
+			return false;
+		return true;
+	}
+	@Override
+	public String toString() {
+		return "Subject [subjectId=" + subjectId + ", subjectName="
+				+ subjectName + ", subjectMarks=" + subjectMarks + "]";
+	}
+	
+	
 	
 	
 }
