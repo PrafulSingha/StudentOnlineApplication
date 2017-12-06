@@ -16,7 +16,7 @@ public class StudentApplicationController {
 	private static final Logger log = Logger.getLogger(StudentApplicationController.class.getName());
 	
 	public static void main(String[] args) {
-		ExecutorService executor = Executors.newFixedThreadPool(5);
+		//ExecutorService executor = Executors.newFixedThreadPool(5);
 		
 		try {
 		
