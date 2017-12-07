@@ -5,6 +5,15 @@ package com.ace.entity;
 
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -14,10 +23,17 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 
 @XmlRootElement
+@Entity
+@Table(name="STUDENT")
 public class Student {
 	
+	@Id
+	@Column(name="ID")
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int studentId;
+	@Column(name="STUDENT_NAME")
 	private String studentName;
+	@Column(name="STUDENT_CLASS")
 	private int studentClass;
 	
 	
@@ -44,6 +60,8 @@ public class Student {
 	public void setStudentClass(int studentClass) {
 		this.studentClass = studentClass;
 	}
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="SUBJECT_ID")
 	public List<Subject> getSubjectList() {
 		return subjectList;
 	}

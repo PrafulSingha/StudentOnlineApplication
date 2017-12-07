@@ -3,6 +3,16 @@
  */
 package com.ace.entity;
 
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -12,12 +22,29 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  */
 @XmlRootElement
+@Entity
+@Table(name="SUBJECT")
 public class Subject {
-	
+	@Id
+	@Column(name="SUBJECT_ID")
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int subjectId;
+	
+	@Column(name="SUBJECT_NAME")
 	private String subjectName;
+	
+	@Column(name="SUBJECT_MARKS")
 	private int subjectMarks;
 	
+	private List<Student> studentList;
+	
+	@OneToMany(fetch=FetchType.LAZY)
+	public List<Student> getStudentList() {
+		return studentList;
+	}
+	public void setStudentList(List<Student> studentList) {
+		this.studentList = studentList;
+	}
 	public int getSubjectId() {
 		return subjectId;
 	}
@@ -39,42 +66,6 @@ public class Subject {
 	public void setSubjectMarks(int subjectMarks) {
 		this.subjectMarks = subjectMarks;
 	}
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + subjectId;
-		result = prime * result + subjectMarks;
-		result = prime * result
-				+ ((subjectName == null) ? 0 : subjectName.hashCode());
-		return result;
-	}
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Subject other = (Subject) obj;
-		if (subjectId != other.subjectId)
-			return false;
-		if (subjectMarks != other.subjectMarks)
-			return false;
-		if (subjectName == null) {
-			if (other.subjectName != null)
-				return false;
-		} else if (!subjectName.equals(other.subjectName))
-			return false;
-		return true;
-	}
-	@Override
-	public String toString() {
-		return "Subject [subjectId=" + subjectId + ", subjectName="
-				+ subjectName + ", subjectMarks=" + subjectMarks + "]";
-	}
-	
 	
 	
 	
