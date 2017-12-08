@@ -1,4 +1,4 @@
-package com.aec.service;
+package com.ace.service;
 
 public interface StudentService {
 	

@@ -1,4 +1,4 @@
-package com.aec.dao.impl;
+package com.ace.dao.impl;
 
 import java.io.File;
 import java.util.logging.Level;
@@ -14,8 +14,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ace.Controller.StudentApplicationController;
+import com.ace.dao.StudentDao;
 import com.ace.entity.Student;
-import com.aec.dao.StudentDao;
 
 @Repository
 public class StudentDaoImpl implements StudentDao{

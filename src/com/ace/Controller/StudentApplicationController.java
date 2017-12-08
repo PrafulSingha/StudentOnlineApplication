@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.ace.entity.Student;
-import com.aec.service.StudentService;
+import com.ace.service.StudentService;
 
 @Controller
 public class StudentApplicationController {

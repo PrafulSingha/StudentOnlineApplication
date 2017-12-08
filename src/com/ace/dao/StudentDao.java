@@ -1,4 +1,4 @@
-package com.aec.dao;
+package com.ace.dao;
 
 public interface StudentDao {
 	
