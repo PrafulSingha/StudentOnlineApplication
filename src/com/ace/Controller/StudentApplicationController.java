@@ -11,6 +11,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,7 +28,8 @@ public class StudentApplicationController {
 	
 	
 	
-	@Autowired
+	@Autowired(required=true)
+	@Qualifier(value="studentService")
 	public void setStudentService(StudentService studentService) {
 		this.studentService = studentService;
 	}

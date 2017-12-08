@@ -46,9 +46,12 @@
 		</beans:property>
 	</beans:bean>
  
-
-	<beans:bean id="personService" class="com.journaldev.spring.service.PersonServiceImpl">
-		<beans:property name="personDAO" ref="personDAO"></beans:property>
+	
+	<beans:bean id="StudentDao" class="com.aec.dao.impl.StudentDaoImpl">
+		<beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+	</beans:bean>
+	<beans:bean id="studentService" class="com.aec.service.impl.StudentServiceImpl">
+		<beans:property name="studentDao" ref="studentDao"></beans:property>
 	</beans:bean>
  
  
