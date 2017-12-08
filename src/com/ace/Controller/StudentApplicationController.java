@@ -6,6 +6,7 @@ import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.servlet.http.HttpSession;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
@@ -15,6 +16,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.ace.entity.Student;
 import com.aec.service.StudentService;
@@ -34,8 +37,13 @@ public class StudentApplicationController {
 		this.studentService = studentService;
 	}
 
-	@RequestMapping(value="/student/add",method=RequestMethod.POST)
-	public void getStudentFromXml(String fileName){
+	@RequestMapping(value="/savefile",method=RequestMethod.POST)
+	public void getStudentFromXml(@RequestParam CommonsMultipartFile file,HttpSession session){
+		String path=session.getServletContext().getRealPath("/");  
+        String fileName=file.getOriginalFilename();  
+          
+        System.out.println(path+" "+fileName);  
+		
 		this.studentService.getStudentFromXml(fileName);
 	}
 
