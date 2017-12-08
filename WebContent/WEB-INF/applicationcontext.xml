@@ -7,7 +7,8 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
 
-<annotation-driven />
+
+	<annotation-driven/>
  
 	<resources mapping="/resources/**" location="/resources/" />
  
@@ -21,7 +22,7 @@
 		destroy-method="close">
 		<beans:property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<beans:property name="url"
-			value="jdbc:mysql://localhost:3306/Student" />
+			value="jdbc:mysql://localhost:3306/studentapp" />
 		<beans:property name="username" value="root" />
 		<beans:property name="password" value="root" />
 	</beans:bean>
@@ -33,6 +34,7 @@
 		<beans:property name="annotatedClasses">
 			<beans:list>
 				<beans:value>com.ace.entity.Student</beans:value>
+				<beans:value>com.ace.entity.Subject</beans:value>
 			</beans:list>
 		</beans:property>
 		<beans:property name="hibernateProperties">
@@ -43,6 +45,12 @@
 			</beans:props>
 		</beans:property>
 	</beans:bean>
+ 
+
+	<beans:bean id="personService" class="com.journaldev.spring.service.PersonServiceImpl">
+		<beans:property name="personDAO" ref="personDAO"></beans:property>
+	</beans:bean>
+ 
  
 	<context:component-scan base-package="com.ace" />
  
