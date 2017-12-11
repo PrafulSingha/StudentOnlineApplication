@@ -55,7 +55,7 @@ public class StudentApplicationController {
 		String path = session.getServletContext().getRealPath("/");
 		String fileName = file.getOriginalFilename();
 
-		System.out.println(path + " " + fileName);
+		System.out.println(path + "" +fileName);
 
 		this.studentService.getStudentFromXml(fileName);
 		return new ModelAndView("uploadform", "filesuccess",
