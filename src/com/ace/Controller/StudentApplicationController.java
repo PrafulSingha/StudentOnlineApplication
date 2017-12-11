@@ -1,8 +1,6 @@
 package com.ace.Controller;
 
 import java.io.File;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -18,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.ace.entity.Student;
 import com.ace.service.StudentService;
@@ -25,11 +24,15 @@ import com.ace.service.StudentService;
 @Controller
 public class StudentApplicationController {
 	private static final Logger log = Logger.getLogger(StudentApplicationController.class.getName());
-	
+    private static final String UPLOAD_DIRECTORY ="/uploadXML";  
+
 	private StudentService studentService;
 	
 	
-	
+	  @RequestMapping("uploadform")  
+	   public ModelAndView uploadForm(){  
+	       return new ModelAndView("uploadform");    
+	   }  
 	
 	@Autowired(required=true)
 	@Qualifier(value="studentService")
@@ -38,13 +41,14 @@ public class StudentApplicationController {
 	}
 
 	@RequestMapping(value="/savefile",method=RequestMethod.POST)
-	public void getStudentFromXml(@RequestParam CommonsMultipartFile file,HttpSession session){
+	public ModelAndView  getStudentFromXml(@RequestParam CommonsMultipartFile file,HttpSession session){
 		String path=session.getServletContext().getRealPath("/");  
         String fileName=file.getOriginalFilename();  
           
         System.out.println(path+" "+fileName);  
 		
 		this.studentService.getStudentFromXml(fileName);
+		return new ModelAndView("uploadform","filesuccess","File successfully saved!");  
 	}
 
 

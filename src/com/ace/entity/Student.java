@@ -3,16 +3,19 @@
  */
 package com.ace.entity;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -36,8 +39,10 @@ public class Student {
 	@Column(name="STUDENT_CLASS")
 	private int studentClass;
 	
-	
-	private List<Subject> subjectList;
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name="STUDENT_SUBJECT" , joinColumns={@JoinColumn(name="ID")},inverseJoinColumns={@JoinColumn(name="SUBJECT_ID")})
+	@ElementCollection(targetClass=Subject.class)
+	private Set<Subject> subjects=new HashSet<Subject>(0);
 	
 	public int getStudentId() {
 		return studentId;
@@ -60,59 +65,14 @@ public class Student {
 	public void setStudentClass(int studentClass) {
 		this.studentClass = studentClass;
 	}
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="SUBJECT_ID")
-	public List<Subject> getSubjectList() {
-		return subjectList;
+	
+	public Set<Subject> getSubjectList() {
+		return subjects;
 	}
 	@XmlElement(name="Subject" , type=Subject.class)
-	public void setSubjectList(List<Subject> subjectList) {
-		this.subjectList = subjectList;
+	public void setSubjectList(Set<Subject> subjects) {
+		this.subjects = subjects;
 	}
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + studentClass;
-		result = prime * result + studentId;
-		result = prime * result
-				+ ((studentName == null) ? 0 : studentName.hashCode());
-		result = prime * result
-				+ ((subjectList == null) ? 0 : subjectList.hashCode());
-		return result;
-	}
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Student other = (Student) obj;
-		if (studentClass != other.studentClass)
-			return false;
-		if (studentId != other.studentId)
-			return false;
-		if (studentName == null) {
-			if (other.studentName != null)
-				return false;
-		} else if (!studentName.equals(other.studentName))
-			return false;
-		if (subjectList == null) {
-			if (other.subjectList != null)
-				return false;
-		} else if (!subjectList.equals(other.subjectList))
-			return false;
-		return true;
-	}
-	@Override
-	public String toString() {
-		return "Student [studentId=" + studentId + ", studentName="
-				+ studentName + ", studentClass=" + studentClass
-				+ ", subjectList=" + subjectList + "]";
-	}
-	
 	
 	
 	

@@ -17,7 +17,7 @@ public class XmlMarshallingController {
 
 	private static final Logger log = Logger.getLogger(XmlMarshallingController.class.getName());
 
-	public static void main(String[] args) {
+	public static void main(String[] args) {/*
 		try {
 			Student student1 = new Student();
 			student1.setStudentId(1);
@@ -53,6 +53,6 @@ public class XmlMarshallingController {
 			log.log(Level.SEVERE, "Error Occourred " + e.getMessage());
 		}
 
-	}
+	*/}
 
 }

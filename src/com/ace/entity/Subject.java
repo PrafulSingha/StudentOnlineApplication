@@ -3,15 +3,11 @@
  */
 package com.ace.entity;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
@@ -36,15 +32,7 @@ public class Subject {
 	@Column(name="SUBJECT_MARKS")
 	private int subjectMarks;
 	
-	private List<Student> studentList;
 	
-	@OneToMany(fetch=FetchType.LAZY)
-	public List<Student> getStudentList() {
-		return studentList;
-	}
-	public void setStudentList(List<Student> studentList) {
-		this.studentList = studentList;
-	}
 	public int getSubjectId() {
 		return subjectId;
 	}
