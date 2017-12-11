@@ -33,7 +33,7 @@ public class StudentApplicationController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String printWelcome(ModelMap model) {
 
-		model.addAttribute("message", "Spring 3 MVC Hello World");
+		model.addAttribute("message", "Student Online Application");
 		return "index";
 
 	}

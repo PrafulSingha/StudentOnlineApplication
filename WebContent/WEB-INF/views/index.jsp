@@ -7,6 +7,9 @@
 <title>Home Page</title>
 </head>
 <body>
+<h1 align="center">${message}</h1>
+<div align="center">
 <a href="uploadform">Upload File</a>
+</div>
 </body>
 </html>

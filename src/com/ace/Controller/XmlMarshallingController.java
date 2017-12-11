@@ -2,7 +2,9 @@ package com.ace.Controller;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -17,7 +19,7 @@ public class XmlMarshallingController {
 
 	private static final Logger log = Logger.getLogger(XmlMarshallingController.class.getName());
 
-	public static void main(String[] args) {/*
+	public static void main(String[] args) {
 		try {
 			Student student1 = new Student();
 			student1.setStudentId(1);
@@ -31,7 +33,7 @@ public class XmlMarshallingController {
 			s2.setSubjectId(2);
 			s2.setSubjectMarks(70);
 			s2.setSubjectName("Physics");
-			List<Subject> subjects = new ArrayList<Subject>();
+			Set<Subject> subjects = new HashSet<Subject>();
 
 			subjects.add(s1);
 			subjects.add(s2);
@@ -53,6 +55,6 @@ public class XmlMarshallingController {
 			log.log(Level.SEVERE, "Error Occourred " + e.getMessage());
 		}
 
-	*/}
+	}
 
 }
