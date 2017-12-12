@@ -12,6 +12,8 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 
+import com.ace.dao.StudentDao;
+import com.ace.dao.impl.StudentDaoImpl;
 import com.ace.entity.Student;
 import com.ace.entity.Subject;
 
@@ -20,6 +22,14 @@ public class XmlMarshallingController {
 	private static final Logger log = Logger.getLogger(XmlMarshallingController.class.getName());
 
 	public static void main(String[] args) {
+		
+		StudentDao studentDao=new StudentDaoImpl();
+		studentDao.getStudentFromXml("C:\file.xml");
+		
+		
+		
+		
+		/*
 		try {
 			Student student1 = new Student();
 			student1.setStudentId(1);
@@ -55,6 +65,6 @@ public class XmlMarshallingController {
 			log.log(Level.SEVERE, "Error Occourred " + e.getMessage());
 		}
 
-	}
+	*/}
 
 }

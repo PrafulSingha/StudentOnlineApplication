@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 @XmlRootElement(name = "students")
 public class Students {
 	
-	@XmlElement(name = "Student")
+	@XmlElement(name = "student")
     private List<Student> students = new ArrayList<Student>();
 
 	public Students() {
