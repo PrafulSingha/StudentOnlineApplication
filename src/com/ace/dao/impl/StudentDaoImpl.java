@@ -22,7 +22,7 @@ import com.ace.entity.Students;
 
 @Repository
 public class StudentDaoImpl implements StudentDao{
-	private static final Logger log = Logger.getLogger(StudentApplicationController.class.getName());
+	//private static final Logger log = Logger.getLogger(StudentApplicationController.class.getName());
 
 	private SessionFactory sessionFactory;
 	
@@ -48,15 +48,18 @@ public class StudentDaoImpl implements StudentDao{
 
 			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 			students = (Students) jaxbUnmarshaller.unmarshal(newFile);
+			System.out.println(students.getStudents().size());
 			
-			
-			for(Student student:students.getStudents()){
-				session.save(student);
-			}
+			session.persist(students.getStudents().get(0));
+			/*for(Student student:students.getStudents()){
+				session.persist(student.);
+				System.out.println(student.getStudentName());
+			}*/
 			
 			transaction.commit();
 		} catch (JAXBException e) {
-			log.log(Level.SEVERE, "Error Occourred " + e.getMessage());
+			System.out.println(e.getMessage());
+			//log.log(Level.SEVERE, "Error Occourred " + e.getMessage());
 
 		}finally{
 			session.close();

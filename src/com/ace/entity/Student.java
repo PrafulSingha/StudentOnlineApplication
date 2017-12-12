@@ -8,7 +8,6 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,14 +16,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 
 /**
  * @author pku160
  *
  */
 
-@XmlRootElement
+
 @Entity
 @Table(name="STUDENT")
 public class Student {
@@ -33,14 +32,15 @@ public class Student {
 	@Column(name="STUDENT_ID")
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int studentId;
+	
 	@Column(name="STUDENT_NAME")
 	private String studentName;
+	
 	@Column(name="STUDENT_CLASS")
 	private int studentClass;
 	
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL,orphanRemoval=true)
 	@JoinColumn(name="STUDENT_ID")
-	@ElementCollection(targetClass=Subject.class)
 	private Set<Subject> subjects=new HashSet<Subject>();
 	
 	public int getStudentId() {
@@ -69,6 +69,7 @@ public class Student {
 		return subjects;
 	}
 	@XmlElement(name="Subject" , type=Subject.class)
+	@XmlElementWrapper(name="subjects")
 	public void setSubjectList(Set<Subject> subjects) {
 		this.subjects = subjects;
 	}
