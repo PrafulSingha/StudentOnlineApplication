@@ -14,8 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -31,7 +30,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Student {
 	
 	@Id
-	@Column(name="ID")
+	@Column(name="STUDENT_ID")
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int studentId;
 	@Column(name="STUDENT_NAME")
@@ -39,10 +38,10 @@ public class Student {
 	@Column(name="STUDENT_CLASS")
 	private int studentClass;
 	
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name="STUDENT_SUBJECT" , joinColumns={@JoinColumn(name="ID")},inverseJoinColumns={@JoinColumn(name="SUBJECT_ID")})
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name="STUDENT_ID")
 	@ElementCollection(targetClass=Subject.class)
-	private Set<Subject> subjects=new HashSet<Subject>(0);
+	private Set<Subject> subjects=new HashSet<Subject>();
 	
 	public int getStudentId() {
 		return studentId;

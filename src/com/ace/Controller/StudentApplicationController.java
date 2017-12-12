@@ -1,14 +1,21 @@
 package com.ace.Controller;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -26,7 +33,8 @@ import com.ace.service.StudentService;
 public class StudentApplicationController {
 	private static final Logger log = Logger
 			.getLogger(StudentApplicationController.class.getName());
-	private static final String UPLOAD_DIRECTORY = "/uploadXML";
+	private static final String UPLOAD_DIRECTORY = "";
+	private static final int THRESHOLD_SIZE     = 1024 * 1024 * 3;
 
 	private StudentService studentService;
 
@@ -50,14 +58,29 @@ public class StudentApplicationController {
 
 	@RequestMapping(value = "/savefile", method = RequestMethod.POST)
 	public ModelAndView getStudentFromXml(
-			@RequestParam CommonsMultipartFile file, HttpSession session) {
+			@RequestParam CommonsMultipartFile file, HttpSession session) throws IOException {
 		System.out.println("Inside Controller");
-		String path = session.getServletContext().getRealPath("/");
-		String fileName = file.getOriginalFilename();
+		DiskFileItemFactory factory = new DiskFileItemFactory();
+		factory.setSizeThreshold(THRESHOLD_SIZE);
+		factory.setRepository(new File(System.getProperty("java.io.tmpdir")));
+		 
+		ServletFileUpload upload = new ServletFileUpload(factory);
+		ServletContext context = session.getServletContext();
 
-		System.out.println(path + "" +fileName);
+		String uploadPath = context.getRealPath(UPLOAD_DIRECTORY);
+		System.out.println(uploadPath);	    
 
-		this.studentService.getStudentFromXml(fileName);
+		byte[] bytes = file.getBytes();
+		BufferedOutputStream stream =new BufferedOutputStream(new FileOutputStream(new File(uploadPath + File.separator + file.getOriginalFilename())));
+		stream.write(bytes);
+		stream.flush();
+		stream.close();
+		
+		String uploadedPath=uploadPath + File.separator + file.getOriginalFilename();
+
+		System.out.println(uploadedPath);
+
+		this.studentService.getStudentFromXml(uploadedPath);
 		return new ModelAndView("uploadform", "filesuccess",
 				"File successfully saved!");
 	}

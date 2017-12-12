@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement
 @Entity
-@Table(name="SUBJECT")
+@Table(name="STUDENT_SUBJECT")
 public class Subject {
 	@Id
 	@Column(name="SUBJECT_ID")
