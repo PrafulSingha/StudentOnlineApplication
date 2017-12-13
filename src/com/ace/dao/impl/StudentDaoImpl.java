@@ -71,21 +71,15 @@ public class StudentDaoImpl implements StudentDao{
 	public void deleteAll() {
 		Transaction transaction = null;
 		Session session = this.sessionFactory.openSession();
-		//try {
 		transaction = session.beginTransaction();
-			
-			Query query1 = session.createQuery("delete Subject");
-			int result1 = query1.executeUpdate();
-			Query query = session.createQuery("delete Student");
-			int result = query.executeUpdate();
-		System.out.println("result"+result +" result1"+result1);
+		Query query1 = session.createQuery("delete Subject");
+		int result1 = query1.executeUpdate();
+		Query query = session.createQuery("delete Student");
+		int result = query.executeUpdate();
+		System.out.println("result" + result + " result1" + result1);
 		transaction.commit();
-		/*}catch(DAOException e){
-			log.log(Level.SEVERE, "Error Occourred " + e.getMessage());
-		}finally{*/
-			session.close();
-		/*}*/
-		
+		session.close();
+
 	}
 	
 	
