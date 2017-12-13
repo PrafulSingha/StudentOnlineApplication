@@ -2,6 +2,7 @@ package com.ace.Controller;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -21,6 +22,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ace.StudentException.ControllerException;
+import com.ace.StudentException.ServiceException;
 import com.ace.service.StudentService;
 
 @Controller
@@ -53,28 +56,35 @@ public class StudentApplicationController {
 
 	@RequestMapping(value = "/savefile", method = RequestMethod.POST)
 	public ModelAndView getStudentFromXml(
-			@RequestParam CommonsMultipartFile file, HttpSession session)
-			throws IOException {
-		System.out.println("Inside Controller");
+			@RequestParam CommonsMultipartFile file, HttpSession session) throws ControllerException {
+		log.log(Level.INFO, "Inside Controller ");
+		
 		DiskFileItemFactory factory = new DiskFileItemFactory();
 		factory.setSizeThreshold(THRESHOLD_SIZE);
 		factory.setRepository(new File(System.getProperty("java.io.tmpdir")));
 
 		ServletContext context = session.getServletContext();
 
-		String uploadPath = context.getRealPath(UPLOAD_DIRECTORY) + File.separator
-				+ file.getOriginalFilename();
-		
+		String uploadPath = context.getRealPath(UPLOAD_DIRECTORY)
+				+ File.separator + file.getOriginalFilename();
 
 		byte[] bytes = file.getBytes();
-		BufferedOutputStream stream = new BufferedOutputStream(
-				new FileOutputStream(new File(uploadPath)));
+		BufferedOutputStream stream;
+		try {
+			stream = new BufferedOutputStream(
+					new FileOutputStream(new File(uploadPath)));
+		
 		stream.write(bytes);
 		stream.flush();
 		stream.close();
+		
 		log.log(Level.INFO, "File uploaded " + file.getName());
 		log.log(Level.INFO, "UploadPath " + uploadPath);
 		this.studentService.getStudentFromXml(uploadPath);
+		} catch (IOException e) {
+			throw new ControllerException("Error Occourred in Controller  " + e.getMessage());
+
+		}
 		return new ModelAndView("uploadform", "filesuccess",
 				"Congrats ... File was successfully Uploaded!");
 	}

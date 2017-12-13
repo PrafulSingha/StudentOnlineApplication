@@ -1,11 +1,8 @@
 package com.ace.dao.impl;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -26,7 +23,6 @@ import com.ace.dao.StudentDao;
 import com.ace.entity.SortStudentByMarks;
 import com.ace.entity.Student;
 import com.ace.entity.Students;
-import com.ace.entity.Subject;
 
 
 @Repository
@@ -45,7 +41,7 @@ public class StudentDaoImpl implements StudentDao{
 
 	@Override
 	@Transactional
-	public void getStudentFromXml(String fileName) {
+	public void getStudentFromXml(String fileName) throws DAOException {
 		deleteAll();
 		Students students = new Students();
 		Transaction transaction = null;
@@ -76,7 +72,7 @@ public class StudentDaoImpl implements StudentDao{
 			transaction.commit();
 		} catch (JAXBException e) {
 			log.log(Level.SEVERE, "Error Occourred while inserting Data " + e.getMessage());
-
+			throw new DAOException("Error Occourred while inserting Data " + e.getMessage());
 		}finally{
 			session.close();
 		}
@@ -85,13 +81,18 @@ public class StudentDaoImpl implements StudentDao{
 
 
 	private void setStudentRank(List<Student> students) {
-
-		students.forEach(student -> {
-			
-			int i = 0;
+		int i = 0;
+		
+		for(Student student: students){
 			student.setRankOfStudents(++i);
 			System.out.println("Total Marks "+student.getTotalMarks() + " Ranks "+student.getRankOfStudents()  + " Pass "+student.isPass());
-		});
+		}
+		/*students.forEach(student -> {
+			
+			
+			student.setRankOfStudents(++i);
+			System.out.println("Total Marks "+student.getTotalMarks() + " Ranks "+student.getRankOfStudents()  + " Pass "+student.isPass());
+		});*/
 
 	}
 		

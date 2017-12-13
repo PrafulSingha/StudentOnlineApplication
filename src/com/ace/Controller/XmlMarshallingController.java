@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.xml.bind.JAXBContext;
@@ -52,6 +53,8 @@ public class XmlMarshallingController {
 		jaxbMarshaller.marshal(students, new FileOutputStream(
 				"C:\\astudent1.xml"));
 		jaxbMarshaller.marshal(students, System.out);
+		
+		log.log(Level.INFO, "Your xml is created " );
 
 	}
 

@@ -1,6 +1,6 @@
 package com.ace.StudentException;
 
-public class DAOException extends StudentException{
+public class DAOException extends ServiceException{
 
 	/**
 	 * 
@@ -32,8 +32,7 @@ public class DAOException extends StudentException{
 		super(cause);
 		// TODO Auto-generated constructor stub
 	}
-	
-	
+
 	
 
 }
