@@ -131,8 +131,7 @@ public class StudentDaoImpl implements StudentDao {
 			for (File f : files) {
 
 				if (f.getName()
-						.substring(f.getName().indexOf("_") + 1,
-								f.getName().length() - 5).equalsIgnoreCase(id)) {
+						.contains(id) && f.getName().contains("_")) {
 
 					byte[] jsonData = Files
 							.readAllBytes(Paths.get(f.getName()));

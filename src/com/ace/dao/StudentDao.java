@@ -7,5 +7,7 @@ public interface StudentDao {
 	public void getStudentFromXml(String fileName) throws DAOException ;
 	
 	public void deleteAll();
+	
+	public String getJsonFiles(String id) throws DAOException;
 
 }

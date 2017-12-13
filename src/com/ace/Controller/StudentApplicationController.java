@@ -47,6 +47,11 @@ public class StudentApplicationController {
 	public ModelAndView uploadForm() {
 		return new ModelAndView("uploadform");
 	}
+	
+	@RequestMapping("searchFile")
+	public ModelAndView searchForm() {
+		return new ModelAndView("searchFile");
+	}
 
 	@Autowired(required = true)
 	@Qualifier(value = "studentService")
@@ -89,9 +94,20 @@ public class StudentApplicationController {
 				"Congrats ... File was successfully Uploaded!");
 	}
 	
-	@RequestMapping("searchFile")
-	public ModelAndView searchFile() {
-		return new ModelAndView("uploadform");
+	@RequestMapping(value="/searchJsonFile",method = RequestMethod.POST)
+	public ModelAndView searchFile(@RequestParam("id") String id) throws ControllerException {
+		String jsonfile;
+		try {
+			jsonfile=this.studentService.getJsonFiles(id);
+		} catch (ServiceException e) {
+			throw new ControllerException("Error Occourred in search file Controller  " + e.getMessage()); 
+		}
+		if(jsonfile!=null){
+			return new ModelAndView("searchFile", "searchSuccess", jsonfile);
+		}else{
+			return new ModelAndView("searchFile", "searchSuccess", "File not found with id "+id);
+		}
+		
 	}
 
 }

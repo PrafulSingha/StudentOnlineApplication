@@ -6,6 +6,8 @@ import java.util.logging.Logger;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ace.StudentException.ControllerException;
+import com.ace.StudentException.DAOException;
 import com.ace.StudentException.ServiceException;
 import com.ace.dao.StudentDao;
 import com.ace.service.StudentService;
@@ -33,6 +35,20 @@ public class StudentServiceImpl implements StudentService{
 				log.log(Level.SEVERE, "Error Occourred in Service " + e.getMessage());
 				throw new ServiceException("Error Occourred in Service " + e.getMessage());
 			}
+	}
+
+
+
+	@Override
+	public String getJsonFiles(String id) throws ServiceException {
+		String jsonfile;
+		try {
+			jsonfile=this.studentDao.getJsonFiles(id);
+		} catch (ServiceException e) {
+			log.log(Level.SEVERE, "Error Occourred in Service while getting json " + e.getMessage());
+			throw new ServiceException("Error Occourred in Service while getting json " + e.getMessage()); 
+		}
+		return jsonfile;
 	}
 
 }
