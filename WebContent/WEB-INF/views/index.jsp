@@ -7,10 +7,14 @@
 <title>Home Page</title>
 </head>
 <body style="background-color: gray;">
-<h1 align="center">Student Online Application</h1>
+<h1 align="center"><u>Student Online Application</u></h1>
 <div align="center">
-<a href="uploadform">Upload File</a>
-<a href="searchFile">Search Report</a>
+<table>
+<tr><p><a href="uploadform">Upload File</a></p></tr>
+<tr><p><a href="searchFile">Search Report</a></p></tr>
+</table>
+
+
 </div>
 </body>
 </html>
