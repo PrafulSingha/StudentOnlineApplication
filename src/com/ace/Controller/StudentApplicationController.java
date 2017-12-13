@@ -88,5 +88,10 @@ public class StudentApplicationController {
 		return new ModelAndView("uploadform", "filesuccess",
 				"Congrats ... File was successfully Uploaded!");
 	}
+	
+	@RequestMapping("searchFile")
+	public ModelAndView searchFile() {
+		return new ModelAndView("uploadform");
+	}
 
 }

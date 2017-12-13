@@ -10,6 +10,7 @@
 <h1 align="center">${message}</h1>
 <div align="center">
 <a href="uploadform">Upload File</a>
+<a href="searchFile">Search Report</a>
 </div>
 </body>
 </html>

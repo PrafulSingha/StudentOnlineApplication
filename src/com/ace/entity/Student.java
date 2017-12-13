@@ -106,6 +106,60 @@ public class Student {
 	public void setPass(boolean isPass) {
 		this.isPass = isPass;
 	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (isPass ? 1231 : 1237);
+		result = prime * result + rankOfStudents;
+		result = prime * result + studentClass;
+		result = prime * result + studentId;
+		result = prime * result
+				+ ((studentName == null) ? 0 : studentName.hashCode());
+		result = prime * result
+				+ ((subjects == null) ? 0 : subjects.hashCode());
+		result = prime * result + totalMarks;
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Student other = (Student) obj;
+		if (isPass != other.isPass)
+			return false;
+		if (rankOfStudents != other.rankOfStudents)
+			return false;
+		if (studentClass != other.studentClass)
+			return false;
+		if (studentId != other.studentId)
+			return false;
+		if (studentName == null) {
+			if (other.studentName != null)
+				return false;
+		} else if (!studentName.equals(other.studentName))
+			return false;
+		if (subjects == null) {
+			if (other.subjects != null)
+				return false;
+		} else if (!subjects.equals(other.subjects))
+			return false;
+		if (totalMarks != other.totalMarks)
+			return false;
+		return true;
+	}
+	@Override
+	public String toString() {
+		return "Student [studentId=" + studentId + ", studentName="
+				+ studentName + ", studentClass=" + studentClass
+				+ ", totalMarks=" + totalMarks + ", rankOfStudents="
+				+ rankOfStudents + ", isPass=" + isPass + ", subjects="
+				+ subjects + "]";
+	}
 	
 	
 	
