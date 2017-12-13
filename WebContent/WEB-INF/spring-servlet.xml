@@ -44,7 +44,7 @@
 		</beans:property>
 		
 	</beans:bean>
- 	
+ 	 <tx:annotation-driven/>
 	
 	<beans:bean id="studentDao" class="com.ace.dao.impl.StudentDaoImpl">
 		<beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />

@@ -17,7 +17,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author pku160
  *
  */
-@XmlRootElement
+
 @Entity
 @Table(name="STUDENT_SUBJECT")
 public class Subject {

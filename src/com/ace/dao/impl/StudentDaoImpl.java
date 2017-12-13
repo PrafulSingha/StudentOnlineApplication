@@ -8,22 +8,23 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ace.Controller.StudentApplicationController;
+import com.ace.StudentException.DAOException;
 import com.ace.dao.StudentDao;
-import com.ace.entity.Student;
 import com.ace.entity.Students;
 
 
 @Repository
 public class StudentDaoImpl implements StudentDao{
-	//private static final Logger log = Logger.getLogger(StudentApplicationController.class.getName());
-
+	private static final Logger log = Logger.getLogger(StudentDaoImpl.class.getName());
+	@Autowired
 	private SessionFactory sessionFactory;
 	
 	
@@ -37,7 +38,8 @@ public class StudentDaoImpl implements StudentDao{
 	@Override
 	@Transactional
 	public void getStudentFromXml(String fileName) {
-		Students students = null;
+		deleteAll();
+		Students students = new Students();
 		Transaction transaction = null;
 		Session session = this.sessionFactory.openSession();
 		try {
@@ -50,22 +52,43 @@ public class StudentDaoImpl implements StudentDao{
 			students = (Students) jaxbUnmarshaller.unmarshal(newFile);
 			System.out.println(students.getStudents().size());
 			
-			session.persist(students.getStudents().get(0));
-			/*for(Student student:students.getStudents()){
-				session.persist(student.);
-				System.out.println(student.getStudentName());
-			}*/
+			students.getStudents().forEach(student -> session.merge(student));
+			
 			
 			transaction.commit();
 		} catch (JAXBException e) {
-			System.out.println(e.getMessage());
-			//log.log(Level.SEVERE, "Error Occourred " + e.getMessage());
+			log.log(Level.SEVERE, "Error Occourred while inserting Data " + e.getMessage());
 
 		}finally{
 			session.close();
 		}
 
 	}
+
+
+
+	@Override
+	public void deleteAll() {
+		Transaction transaction = null;
+		Session session = this.sessionFactory.openSession();
+		//try {
+		transaction = session.beginTransaction();
+			
+			Query query1 = session.createQuery("delete Subject");
+			int result1 = query1.executeUpdate();
+			Query query = session.createQuery("delete Student");
+			int result = query.executeUpdate();
+		System.out.println("result"+result +" result1"+result1);
+		transaction.commit();
+		/*}catch(DAOException e){
+			log.log(Level.SEVERE, "Error Occourred " + e.getMessage());
+		}finally{*/
+			session.close();
+		/*}*/
+		
+	}
+	
+	
 	
 	
 

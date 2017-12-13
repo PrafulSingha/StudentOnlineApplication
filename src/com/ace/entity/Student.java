@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 
@@ -39,14 +40,14 @@ public class Student {
 	@Column(name="STUDENT_CLASS")
 	private int studentClass;
 	
-	@OneToMany(cascade = CascadeType.ALL,orphanRemoval=true)
+	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name="STUDENT_ID")
 	private Set<Subject> subjects=new HashSet<Subject>();
 	
 	public int getStudentId() {
 		return studentId;
 	}
-	@XmlElement
+	@XmlAttribute
 	public void setStudentId(int studentId) {
 		this.studentId = studentId;
 	}
@@ -73,6 +74,46 @@ public class Student {
 	public void setSubjectList(Set<Subject> subjects) {
 		this.subjects = subjects;
 	}
+	
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + studentClass;
+		result = prime * result + studentId;
+		result = prime * result
+				+ ((studentName == null) ? 0 : studentName.hashCode());
+		result = prime * result
+				+ ((subjects == null) ? 0 : subjects.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Student other = (Student) obj;
+		if (studentClass != other.studentClass)
+			return false;
+		if (studentId != other.studentId)
+			return false;
+		if (studentName == null) {
+			if (other.studentName != null)
+				return false;
+		} else if (!studentName.equals(other.studentName))
+			return false;
+		if (subjects == null) {
+			if (other.subjects != null)
+				return false;
+		} else if (!subjects.equals(other.subjects))
+			return false;
+		return true;
+	}
+	
 	
 	
 	
