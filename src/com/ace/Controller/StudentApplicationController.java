@@ -38,7 +38,6 @@ public class StudentApplicationController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String printWelcome(ModelMap model) {
 
-		model.addAttribute("message", "Student Online Application");
 		return "index";
 
 	}
@@ -48,6 +47,10 @@ public class StudentApplicationController {
 		return new ModelAndView("uploadform");
 	}
 	
+	@RequestMapping("index")
+	public ModelAndView goToHome() {
+		return new ModelAndView("index");
+	}
 	
 	@RequestMapping("searchFile")
 	public ModelAndView searchForm() {

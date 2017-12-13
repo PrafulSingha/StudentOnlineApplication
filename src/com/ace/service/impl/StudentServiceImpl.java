@@ -43,7 +43,7 @@ public class StudentServiceImpl implements StudentService{
 	public String getJsonFiles(String id) throws ServiceException {
 		String jsonfile;
 		try {
-			jsonfile=this.studentDao.getJsonFiles(id);
+			jsonfile="Student with id "+id+" is " +"\n"+this.studentDao.getJsonFiles(id);
 		} catch (ServiceException e) {
 			log.log(Level.SEVERE, "Error Occourred in Service while getting json " + e.getMessage());
 			throw new ServiceException("Error Occourred in Service while getting json " + e.getMessage()); 

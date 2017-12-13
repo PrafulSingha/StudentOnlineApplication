@@ -9,12 +9,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>View Report</title>
 </head>
-<body>
-<h3 style="color:blue;" align="center">${searchSuccess}</h3>  
+<body style="background-color: gray;">
 <form:form action="searchJsonFile" method="post" >  
 <p align="center"><label for="idsearch">Type id to search</label></p> 
 <p align="center"><input type="text" name="id"/></p>  
 <p align="center"><input type="submit" value="Search File"/></p>  
 </form:form>
+<br>
+<br>
+<p align="center"><a href="index">Go To Home</a></p>
 </body>
 </html>

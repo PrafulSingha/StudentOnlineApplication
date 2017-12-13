@@ -6,8 +6,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Home Page</title>
 </head>
-<body>
-<h1 align="center">${message}</h1>
+<body style="background-color: gray;">
+<h1 align="center">Student Online Application</h1>
 <div align="center">
 <a href="uploadform">Upload File</a>
 <a href="searchFile">Search Report</a>

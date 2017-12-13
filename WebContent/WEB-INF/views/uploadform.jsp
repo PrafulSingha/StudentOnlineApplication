@@ -9,13 +9,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Upload Form</title>
 </head>
-<body>
-<h3 style="color:blue;" align="center">${filesuccess}</h3>  
+<body style="background-color: gray;"> 
 <form:form action="savefile" method="post" enctype="multipart/form-data">  
 <p align="center"><label for="fileChoose">Choose File To Upload</label></p> 
 <p align="center"><input type="file" name="file"/></p>  
 <p align="center"><input type="submit" value="Upload File"/></p>  
 </form:form>
-
+<br>
+<br>
+<p align="center"><a href="index">Go To Home</a></p>
 </body>
 </html>
