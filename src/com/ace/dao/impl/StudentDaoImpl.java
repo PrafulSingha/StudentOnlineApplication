@@ -1,6 +1,11 @@
 package com.ace.dao.impl;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -18,7 +23,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ace.StudentException.DAOException;
 import com.ace.dao.StudentDao;
+import com.ace.entity.SortStudentByMarks;
+import com.ace.entity.Student;
 import com.ace.entity.Students;
+import com.ace.entity.Subject;
 
 
 @Repository
@@ -52,8 +60,18 @@ public class StudentDaoImpl implements StudentDao{
 			students = (Students) jaxbUnmarshaller.unmarshal(newFile);
 			System.out.println(students.getStudents().size());
 			
-			students.getStudents().forEach(student -> session.merge(student));
+			students.getStudents().forEach(student -> {
+				session.merge(student);
+				Integer totalMarks=student.getSubjectList().stream().mapToInt(subject -> subject.getSubjectMarks()).sum();
+				student.setTotalMarks(totalMarks);
+				if(totalMarks>=35){
+					student.setPass(true);
+				}
+				
+			});
+			Collections.sort(students.getStudents(), Collections.reverseOrder(new SortStudentByMarks()));
 			
+			setStudentRank(students.getStudents());
 			
 			transaction.commit();
 		} catch (JAXBException e) {
@@ -64,6 +82,20 @@ public class StudentDaoImpl implements StudentDao{
 		}
 
 	}
+
+
+	private void setStudentRank(List<Student> students) {
+
+		students.forEach(student -> {
+			
+			int i = 0;
+			student.setRankOfStudents(++i);
+			System.out.println("Total Marks "+student.getTotalMarks() + " Ranks "+student.getRankOfStudents()  + " Pass "+student.isPass());
+		});
+
+	}
+		
+	
 
 
 

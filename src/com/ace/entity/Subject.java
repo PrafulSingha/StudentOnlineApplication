@@ -11,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * @author pku160
@@ -23,7 +22,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Subject {
 	@Id
 	@Column(name="SUBJECT_ID")
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int subjectId;
 	
 	@Column(name="SUBJECT_NAME")

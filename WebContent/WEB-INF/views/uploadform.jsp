@@ -10,11 +10,11 @@
 <title>Upload Form</title>
 </head>
 <body>
-<h3 style="color:red">${filesuccess}</h3>  
+<h3 style="color:red" align="center">${filesuccess}</h3>  
 <form:form action="savefile" method="post" enctype="multipart/form-data">  
-<p><label for="fileChoose">Choose File</label></p> 
-<p><input type="file" name="file"/></p>  
-<p><input type="submit" value="Upload File"/></p>  
+<p align="center"><label for="fileChoose">Choose File To Upload</label></p> 
+<p align="center"><input type="file" name="file"/></p>  
+<p align="center"><input type="submit" value="Upload File"/></p>  
 </form:form>
 
 </body>
