@@ -25,10 +25,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ace.StudentException.DAOException;
 import com.ace.dao.StudentDao;
-import com.ace.entity.SortStudentByMarks;
 import com.ace.entity.Student;
-import com.ace.entity.Students;
 import com.ace.entity.Subject;
+import com.ace.utility.SortStudentByMarks;
+import com.ace.utility.Students;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Repository

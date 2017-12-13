@@ -1,6 +1,8 @@
-package com.ace.entity;
+package com.ace.utility;
 
 import java.util.Comparator;
+
+import com.ace.entity.Student;
 
 public class SortStudentByMarks implements Comparator<Student>{
 

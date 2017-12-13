@@ -1,4 +1,4 @@
-package com.ace.entity;
+package com.ace.utility;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,6 +7,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlAccessType;
+
+import com.ace.entity.Student;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "students")

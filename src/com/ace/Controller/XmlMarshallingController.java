@@ -13,8 +13,8 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 
 import com.ace.entity.Student;
-import com.ace.entity.Students;
 import com.ace.entity.Subject;
+import com.ace.utility.Students;
 
 public class XmlMarshallingController {
 
@@ -39,9 +39,9 @@ public class XmlMarshallingController {
 			s2.setSubjectMarks(48 +i%2 +i/4 );
 			s2.setSubjectName("Physics");
 			Subject s3 = new Subject();
-			s1.setSubjectId(i + 3);
-			s2.setSubjectMarks(35 + i%2 +i/7 );
-			s2.setSubjectName("English");
+			s3.setSubjectId(i + 3);
+			s3.setSubjectMarks(35 + i%2 +i/7 );
+			s3.setSubjectName("English");
 			Set<Subject> subjects = new HashSet<Subject>();
 			subjects.add(s1);
 			subjects.add(s2);
