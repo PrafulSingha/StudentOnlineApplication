@@ -31,7 +31,7 @@ public class StudentServiceImpl implements StudentService{
 	public void getStudentFromXml(String fileName) throws ServiceException {
 			try {
 				this.studentDao.getStudentFromXml(fileName);
-			} catch (ServiceException e) {
+			} catch (DAOException e) {
 				log.log(Level.SEVERE, "Error Occourred in Service " + e.getMessage());
 				throw new ServiceException("Error Occourred in Service " + e.getMessage());
 			}
