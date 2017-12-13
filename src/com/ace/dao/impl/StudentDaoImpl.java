@@ -28,6 +28,7 @@ import com.ace.dao.StudentDao;
 import com.ace.entity.SortStudentByMarks;
 import com.ace.entity.Student;
 import com.ace.entity.Students;
+import com.ace.entity.Subject;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Repository
@@ -127,6 +128,7 @@ public class StudentDaoImpl implements StudentDao {
 		File[] files = file.listFiles();
 		ObjectMapper objectMapper;
 		Student student = null;
+		String subjectDetails = " subjects ";
 		try {
 			for (File f : files) {
 
@@ -147,7 +149,11 @@ public class StudentDaoImpl implements StudentDao {
 					"Error Occourred while Reading Json File Data "
 							+ e.getMessage());
 		}
-		return student.toString();
+		for(Subject s:student.getSubjectList()){
+			subjectDetails="["+subjectDetails+s.toString()+" , ";
+		}
+		subjectDetails=subjectDetails+"]";
+		return student.toString() +subjectDetails;
 	}
 
 	@Override

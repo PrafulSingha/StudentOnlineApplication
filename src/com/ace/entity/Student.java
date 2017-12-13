@@ -157,9 +157,9 @@ public class Student {
 		return "Student [studentId=" + studentId + ", studentName="
 				+ studentName + ", studentClass=" + studentClass
 				+ ", totalMarks=" + totalMarks + ", rankOfStudents="
-				+ rankOfStudents + ", isPass=" + isPass + ", subjects="
-				+ subjects + "]";
+				+ rankOfStudents + ", isPass=" + isPass + "]";
 	}
+	
 	
 	
 	

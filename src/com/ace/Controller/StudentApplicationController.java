@@ -48,6 +48,7 @@ public class StudentApplicationController {
 		return new ModelAndView("uploadform");
 	}
 	
+	
 	@RequestMapping("searchFile")
 	public ModelAndView searchForm() {
 		return new ModelAndView("searchFile");
@@ -90,7 +91,7 @@ public class StudentApplicationController {
 			throw new ControllerException("Error Occourred in Controller  " + e.getMessage());
 
 		}
-		return new ModelAndView("uploadform", "filesuccess",
+		return new ModelAndView("output", "output",
 				"Congrats ... File was successfully Uploaded!");
 	}
 	
@@ -103,9 +104,9 @@ public class StudentApplicationController {
 			throw new ControllerException("Error Occourred in search file Controller  " + e.getMessage()); 
 		}
 		if(jsonfile!=null){
-			return new ModelAndView("searchFile", "searchSuccess", jsonfile);
+			return new ModelAndView("output", "output", jsonfile);
 		}else{
-			return new ModelAndView("searchFile", "searchSuccess", "File not found with id "+id);
+			return new ModelAndView("output", "output", "File not found with id "+id);
 		}
 		
 	}
