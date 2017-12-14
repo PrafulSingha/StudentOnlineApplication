@@ -63,11 +63,15 @@ public class StudentApplicationController {
 		this.studentService = studentService;
 	}
 
+	/*
+	 * This method gets data from uploaded xml , create database entry and json files
+	 * 
+	*/
 	@RequestMapping(value = "/savefile", method = RequestMethod.POST)
 	public ModelAndView getStudentFromXml(
 			@RequestParam CommonsMultipartFile file, HttpSession session) throws ControllerException {
 		log.log(Level.INFO, "Inside Controller ");
-		
+		String result="Congrats ... File was successfully Uploaded!";
 		DiskFileItemFactory factory = new DiskFileItemFactory();
 		factory.setSizeThreshold(THRESHOLD_SIZE);
 		factory.setRepository(new File(System.getProperty("java.io.tmpdir")));
@@ -91,13 +95,20 @@ public class StudentApplicationController {
 		log.log(Level.INFO, "UploadPath " + uploadPath);
 		this.studentService.getStudentFromXml(uploadPath);
 		} catch (IOException e) {
-			throw new ControllerException("Error Occourred in Controller  " + e.getMessage());
-
+			log.log(Level.SEVERE, "Error Occourred in Controller while getting Student From Xml " + file.getName());
+			result="Error occurred while uploading";
+			throw new ControllerException("Error Occourred in Controller while getting Student From Xml " + e.getMessage());
+			
 		}
 		return new ModelAndView("output", "output",
-				"Congrats ... File was successfully Uploaded!");
+				result);
 	}
 	
+	
+	/*
+	 * This method gets checks if report is present for particular id
+	 * 
+	*/
 	@RequestMapping(value="/searchJsonFile",method = RequestMethod.POST)
 	public ModelAndView searchFile(@RequestParam("id") String id) throws ControllerException {
 		String jsonfile;

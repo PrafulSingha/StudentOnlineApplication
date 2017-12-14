@@ -25,7 +25,10 @@ public class StudentServiceImpl implements StudentService{
 	}
 
 
-
+	/*
+	 * This method gets data from uploaded xml , create database entry and json files
+	 * 
+	*/
 	@Override
 	@Transactional
 	public void getStudentFromXml(String fileName) throws ServiceException {
@@ -38,7 +41,10 @@ public class StudentServiceImpl implements StudentService{
 	}
 
 
-
+	/*
+	 * This method gets checks if report is present for particular id
+	 * 
+	*/
 	@Override
 	public String getJsonFiles(String id) throws ServiceException {
 		String jsonfile;

@@ -42,6 +42,10 @@ public class StudentDaoImpl implements StudentDao {
 		this.sessionFactory = sessionFactory;
 	}
 
+	/*
+	 * This method gets data from uploaded xml , create database entry and json files
+	 * 
+	*/
 	@Override
 	@Transactional
 	public void getStudentFromXml(String fileName) throws DAOException {
@@ -87,6 +91,10 @@ public class StudentDaoImpl implements StudentDao {
 
 	}
 
+	/*
+	 * This method create json files after calculating Rank
+	 * 
+	*/
 	private void setStudentRankinJson(List<Student> students)
 			throws DAOException {
 		int i = 0;
@@ -122,7 +130,10 @@ public class StudentDaoImpl implements StudentDao {
 		}
 
 	}
-
+	/*
+	 * This method gets checks if report is present for particular id
+	 * 
+	*/
 	public String getJsonFiles(String id) throws DAOException {
 		File file = new File(System.getProperty("user.dir"));
 		File[] files = file.listFiles();
@@ -133,7 +144,7 @@ public class StudentDaoImpl implements StudentDao {
 			for (File f : files) {
 
 				if (f.getName()
-						.contains(id) && f.getName().contains("_")) {
+						.contains(id) && f.getName().contains("_") && f.getName().contains(".json")) {
 
 					byte[] jsonData = Files
 							.readAllBytes(Paths.get(f.getName()));
@@ -156,6 +167,10 @@ public class StudentDaoImpl implements StudentDao {
 		return student.toString() +subjectDetails;
 	}
 
+	/*
+	 * This method deletes all data in each run 
+	 * 
+	*/
 	@Override
 	public void deleteAll() {
 		Transaction transaction = null;
@@ -166,6 +181,8 @@ public class StudentDaoImpl implements StudentDao {
 		Query query = session.createQuery("delete Student");
 		int result = query.executeUpdate();
 		System.out.println("result" + result + " result1" + result1);
+		
+		log.log(Level.INFO, "result " + result + " result1 " + result1);
 		transaction.commit();
 		session.close();
 

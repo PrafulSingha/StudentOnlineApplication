@@ -25,7 +25,7 @@ public class StudentApplicationTests {
 
 	
 	@Test
-	public void test() throws ServiceException {
+	public void testisNull() throws ServiceException {
 		
 		String s=studentDao.getJsonFiles("1");
 		
@@ -33,5 +33,16 @@ public class StudentApplicationTests {
 		
 		
 	}
+	
+	@Test
+	public void testisequal() throws ServiceException {
+		
+		String s=studentDao.getJsonFiles("1");
+		
+		assertEquals("1".contains("1"), s.contains("1"));
+		
+		
+	}
+
 
 }
