@@ -51,12 +51,9 @@ public class StudentDaoImpl implements StudentDao {
 	public void getStudentFromXml(String fileName) throws DAOException {
 		deleteAll();
 		Students students = new Students();
-		Transaction transaction = null;
 		Session session = this.sessionFactory.openSession();
 		try {
 			File newFile = new File(fileName);
-			transaction = session.beginTransaction();
-
 			JAXBContext jaxbContext = JAXBContext.newInstance(Students.class);
 
 			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
@@ -80,7 +77,6 @@ public class StudentDaoImpl implements StudentDao {
 
 			setStudentRankinJson(students.getStudents());
 
-			transaction.commit();
 			session.close();
 		} catch (JAXBException e) {
 			log.log(Level.SEVERE,
@@ -173,9 +169,7 @@ public class StudentDaoImpl implements StudentDao {
 	*/
 	@Override
 	public void deleteAll() {
-		Transaction transaction = null;
 		Session session = this.sessionFactory.openSession();
-		transaction = session.beginTransaction();
 		Query query1 = session.createQuery("delete Subject");
 		int result1 = query1.executeUpdate();
 		Query query = session.createQuery("delete Student");
@@ -183,7 +177,6 @@ public class StudentDaoImpl implements StudentDao {
 		System.out.println("result" + result + " result1" + result1);
 		
 		log.log(Level.INFO, "result " + result + " result1 " + result1);
-		transaction.commit();
 		session.close();
 
 	}
