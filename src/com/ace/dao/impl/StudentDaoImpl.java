@@ -122,7 +122,7 @@ public class StudentDaoImpl implements StudentDao {
 
 				}
 			});
-
+			service.shutdown();
 		}
 
 	}
